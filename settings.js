@@ -19,14 +19,14 @@ global.APIKeys = {
 }
 
 //customize settings\\
-global.owner = ['Your Number']
-global.premium = ['Your Number']
-global.ownernomer = 'Your Number'
-global.ownername = '🐦Star Boy Nexus'
-global.botname = 'Gojo-Satoru'
-global.footer = '©NexusNwInc.'
+global.owner = ['254790903965']
+global.premium = ['254790903965']
+global.ownernomer = '254790903965'
+global.ownername = '🕊⋆☠︎︎𝕵⊕𝖛𝖎ηψ⊕️☠︎︎💎ღ𓃾𓃾'
+global.botname = '☠︎︎LEG𝖎T B⊕️T☠︎︎💎ღ𓃾𓃾'
+global.footer = '©🕊⋆☠︎︎𝕵⊕𝖛𝖎ηψ⊕️☠︎︎💎ღ𓃾𓃾.'
 global.ig = 'https://github.com/nexusNw'
-global.region = 'India, South India, Kerala'
+global.region = 'India, LA, USA, UK, London'
 global.sc = 'https://github.com/nexusNw/Gojo-Satoru'
 global.myweb = 'https://youtube.com/channel/UCqoUjPvDdb0kjXNYdvPPpHQ'
 global.packname = 'Gojo-Satoru'
@@ -35,14 +35,14 @@ global.sessionName = 'session'
 global.prefa = ['','!','.','🐦','🐤','🗿']
 global.sp = '⭔'
 global.mess = {
-    success: 'Done ✓',
-    admin: 'This Feature Is Only For Admin!',
-    botAdmin: 'Bot Must Be Admin First!',
-    owner: 'This Feature Is Only For Owner!',
+    success: 'Done✔️🏁🏁',
+    admin: 'Wewe si Admin😑😑!',
+    botAdmin: 'Niekwe Admin Kwanza💀💀(NAK)!',
+    owner: 'Wewe si boss wangu😑😑!',
     group: 'Feature Used Only For Groups!',
     private: 'Features Used Only For Private Chat!',
-    bot: 'This Feature Is Only For Bot',
-    wait: 'Wait A minute...',
+    bot: 'Hii n ya Bot pekee',
+    wait: 'Tulia tuh kiac...',
     error: 'Error! Maybe Api Key Is Expired🤔!',
     endLimit: 'Your Daily Limit Has Expired, The Limit Will Be Reset Every 12 Hours',
 }
