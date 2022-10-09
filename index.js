@@ -150,11 +150,11 @@ Tol = await getBuffer(`https://telegra.ph/file/eaac2226c3af92c5fe062.jpg`)
 
 ⭐✑ Description: ${metadata.desc}
 
-⭐✑ Welcome To Our Comfortable Happy😋, Sometimes Loud😜, Usually Messy🤥, Full Of Love🥰, HOME😌!!`} )
+⭐✑ Welcome To Our Group #Socialising!!`} )
                 } else if (anu.action == 'remove') {
-                    GojoMdNx.sendMessage(anu.id, { image: Tol, contextInfo: { mentionedJid: [num] }, caption: `⭐✑ @${num.split("@")[0]} Left ${metadata.subject}
+                    GojoMdNx.sendMessage(anu.id, { image: Tol, contextInfo: { mentionedJid: [num] }, caption: `⭐✑ Hii Kienyeji👉👉 @${num.split("@")[0]} 😂💔imeleft ${metadata.subject}
 
-⭐✑ I'm Not Sure If It Was A Goodbye Charm, But It Was Fun While It Lasted 😌✨` })
+⭐✑ Anyway akuna ubaya Arif😂👊👊` })
                 }
             }
         } catch (err) {
