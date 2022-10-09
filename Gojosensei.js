@@ -181,9 +181,14 @@ module.exports = GojoMdNx = async (GojoMdNx, m, chatUpdate, store) => {
             if (chats) {
                 if (!('mute' in chats)) chats.mute = false
                 if (!('antilink' in chats)) chats.antilink = false
+                if (!('welcome' in chats)) chats.welcome = false
+                if (!('bye' in chats)) chats.bye = false
             } else global.db.data.chats[m.chat] = {
                 mute: false,
                 antilink: false,
+		welcome: false,
+		bye: false,
+		
             }
 		
 	    let setting = global.db.data.settings[botNumber]
@@ -256,6 +261,99 @@ const reply = (teks) => {
         GojoMdNx.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
         }
         }
+	    case 'welcome': {
+
+		if (!m.isGroup) return replay(`${mess.group}`)
+
+                if (!isBotAdmins) return replay(`${mess.botAdmin}`)
+
+                if (!isAdmins) return replay(`${mess.admin}`)
+
+                if (args[0] === "on") {
+
+                if (db.data.chats[m.chat].welcome) return reply(`Activated`)
+
+                db.data.chats[m.chat].welcome = true
+
+                reply(`Welcome Messages Active !`)
+
+                } else if (args[0] === "off") {
+
+                if (!db.data.chats[m.chat].welcome) return reply(`Deactivated`)
+
+                db.data.chats[m.chat].welcome = false
+
+                reply(`Welcome Messages Inactive !`)
+
+                } else {
+
+                 let buttons = [
+
+                        { buttonId: 'welcome on', buttonText: { displayText: 'On' }, type: 1 },
+
+                        { buttonId: 'welcome off', buttonText: { displayText: 'Off' }, type: 1 }
+
+	
+
+			 ]
+
+		await GojoMdNx.sendButtonText(m.chat, buttons, `Welcome Mode`, GojoMdNx.user.name, m)
+
+	
+
+			 }
+
+		     }
+
+		    break
+
+		case 'bye': {
+
+		if (!m.isGroup) return replay(`${mess.group}`)
+
+                if (!isBotAdmins) return replay(`${mess.botAdmin}`)
+
+                if (!isAdmins) return replay(`${mess.admin}`)
+
+                if (args[0] === "on") {
+
+                if (db.data.chats[m.chat].bye) return reply(`Activated`)
+
+                db.data.chats[m.chat].bye = true
+
+                reply(`Bye Messages Active !`)
+
+                } else if (args[0] === "off") {
+
+                if (!db.data.chats[m.chat].bye) return reply(`Deactivated`)
+
+                db.data.chats[m.chat].bye = false
+
+                reply(`Bye Messages Inactive !`)
+
+                } else {
+
+                 let buttons = [
+
+                        { buttonId: 'bye on', buttonText: { displayText: 'On' }, type: 1 },
+
+                        { buttonId: 'bye off', buttonText: { displayText: 'Off' }, type: 1 }
+
+	
+
+			 ]
+
+		await GojoMdNx.sendButtonText(m.chat, buttons, `Bye Mode`, GojoMdNx.user.name, m)
+
+	
+
+			 }
+
+		     }
+
+		    break
+
+	
 
         //auto reply 
         for (let anji of setik){
@@ -287,6 +385,21 @@ const reply = (teks) => {
       if (db.data.chats[m.chat].mute && !isAdmins && !isCreator) {
       return
       }
+	    	//welcome message\\
+
+      if (db.data.chats[m.chat].welcome && !isAdmins && !isCreator) {
+
+      return
+
+      }
+
+	//bye message\\
+
+      if (db.data.chats[m.chat].bye && !isAdmins && !isCreator) {
+
+      return
+
+      }    
         
         //media detect \\
 		const isQuotedImage = type === 'extendedTextMessage' && content.includes('imageMessage')
