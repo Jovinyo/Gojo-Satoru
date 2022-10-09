@@ -1192,7 +1192,7 @@ Please @${m.mentionedJid[0].split`@`[0]} To Type Accept/Reject`
             let orang = member[Math.floor(Math.random() * member.length)]
             let jodoh = member[Math.floor(Math.random() * member.length)]
             let jawab = `@${orang.split('@')[0]} ❤️ @${jodoh.split('@')[0]}
-Eeeeish🤭, What's Going On❤️💖👀`
+Eeeeish🤭, Mtaachana tuh😂💔`
             let menst = [orang, jodoh]
             let buttons = [
                         { buttonId: '❤️', buttonText: { displayText: '❤️' }, type: 1 }
@@ -1598,7 +1598,7 @@ let teks = `╚»˙·٠•●✨ Tag All ✨●•٠·˙«╝
                 GojoMdNx.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
                 }
                 break
-                case 'hidetag': case 'h': {
+                case 'hidetag': {
             if (!m.isGroup) return replay(`${mess.group}`)
             if (!isBotAdmins) return replay(`${mess.botAdmin}`)
             if (!isAdmins) return replay(`${mess.admin}`)
