@@ -258,104 +258,17 @@ const reply = (teks) => {
         if (isgclink) return reply(`Group Is Installed With Anti-Link But I Won't Kick You 😉, Because You Sent This Group Link❤️`)
         if (isAdmins) return reply(`Group Is Installed With Anti-Link But I Won't Kick You 😉, Because You Are An Admin Of The Group❤️`)
         if (isCreator) return reply(`Group Is Installed With Anti-Link But I Won't Kick You 😉, Because You Are My Owner Hahahahah🤣😘, You Think I Will Betray You Huh🐦`)
+		]
+		
         GojoMdNx.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
         }
         }
-	    case 'welcome': {
+	    
+           break
 
-		if (!m.isGroup) return replay(`${mess.group}`)
+		    
 
-                if (!isBotAdmins) return replay(`${mess.botAdmin}`)
-
-                if (!isAdmins) return replay(`${mess.admin}`)
-
-                if (args[0] === "on") {
-
-                if (db.data.chats[m.chat].welcome) return reply(`Activated`)
-
-                db.data.chats[m.chat].welcome = true
-
-                reply(`Welcome Messages Active !`)
-
-                } else if (args[0] === "off") {
-
-                if (!db.data.chats[m.chat].welcome) return reply(`Deactivated`)
-
-                db.data.chats[m.chat].welcome = false
-
-                reply(`Welcome Messages Inactive !`)
-
-                } else {
-
-                 let buttons = [
-
-                        { buttonId: 'welcome on', buttonText: { displayText: 'On' }, type: 1 },
-
-                        { buttonId: 'welcome off', buttonText: { displayText: 'Off' }, type: 1 }
-
-	
-
-			 ]
-
-		await GojoMdNx.sendButtonText(m.chat, buttons, `Welcome Mode`, GojoMdNx.user.name, m)
-
-	
-
-			 }
-
-		     }
-
-		    break
-
-		case 'bye': {
-
-		if (!m.isGroup) return replay(`${mess.group}`)
-
-                if (!isBotAdmins) return replay(`${mess.botAdmin}`)
-
-                if (!isAdmins) return replay(`${mess.admin}`)
-
-                if (args[0] === "on") {
-
-                if (db.data.chats[m.chat].bye) return reply(`Activated`)
-
-                db.data.chats[m.chat].bye = true
-
-                reply(`Bye Messages Active !`)
-
-                } else if (args[0] === "off") {
-
-                if (!db.data.chats[m.chat].bye) return reply(`Deactivated`)
-
-                db.data.chats[m.chat].bye = false
-
-                reply(`Bye Messages Inactive !`)
-
-                } else {
-
-                 let buttons = [
-
-                        { buttonId: 'bye on', buttonText: { displayText: 'On' }, type: 1 },
-
-                        { buttonId: 'bye off', buttonText: { displayText: 'Off' }, type: 1 }
-
-	
-
-			 ]
-
-		await GojoMdNx.sendButtonText(m.chat, buttons, `Bye Mode`, GojoMdNx.user.name, m)
-
-	
-
-			 }
-
-		     }
-
-		    break
-
-	
-
-        //auto reply 
+       //auto reply 
         for (let anji of setik){
 				if (budy === anji){
 					result = fs.readFileSync(`./GojoMedia/sticker/${anji}.webp`)
@@ -1280,7 +1193,7 @@ Please @${m.mentionedJid[0].split`@`[0]} To Type Accept/Reject`
             let orang = member[Math.floor(Math.random() * member.length)]
             let jodoh = member[Math.floor(Math.random() * member.length)]
             let jawab = `@${orang.split('@')[0]} ❤️ @${jodoh.split('@')[0]}
-Cieeee, What's Going On❤️💖👀`
+Eeeeish🤭, What's Going On❤️💖👀`
             let menst = [orang, jodoh]
             let buttons = [
                         { buttonId: '❤️', buttonText: { displayText: '❤️' }, type: 1 }
@@ -1460,6 +1373,45 @@ case 'halah': case 'hilih': case 'huluh': case 'heleh': case 'holoh':
                 GojoMdNx.sendMessage(m.chat, reactionMessage)
             }
             break  
+	case 'lyrics':
+
+		 if (!text)return reply('Enter the title of the song. eg, lyrics faded')
+
+	try {
+
+		lilink = await fetchJson(encodeURI(`https://some-random-api.ml/lyrics?title=${text}`))
+
+					 
+
+		 .then(datas => 
+
+			 (	 GojoMdNx.sendMessage(m.chat, { image: { url: datas.thumbnail.genius }, caption: `
+
+			 
+
+			 *Title:* ${datas.title}
+
+			 *Artist:* ${datas.author}
+
+*Lyrics:*\n ${datas.lyrics}
+
+			 
+
+*Link:* ${datas.links.genius}
+
+*⚠:* ${datas.disclaimer}
+
+			 
+
+			 ` }, { quoted: m })	))
+
+		} catch (error) {
+
+     				  reply(`No lyrics found.\nTry *${prefix + "lyrics2" + " "+ text}*`)
+
+		}
+
+		break
             case 'join': {
                 if (!isCreator) return replay(`${mess.owner}`)
                 if (!text) return replay(`Enter The Group Link!`)
@@ -1482,37 +1434,108 @@ case 'halah': case 'hilih': case 'huluh': case 'heleh': case 'holoh':
           reply(`Exif Has Been Successfully Changed to\n\n🐦 Packname : ${global.packname}\n🐦 Author : ${global.author}`)
             }
             break
-	case 'kick': {
+	case 'remove': {
+
 		if (!m.isGroup) return replay(`${mess.group}`)
+
                 if (!isBotAdmins) return replay(`${mess.botAdmin}`)
-                if (!isAdmins) return replay(`${mess.admin}`)
+
+                 if ((!isAdmins)&&(!isCreator))  return replay(`${mess.admin}`)
+
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await GojoMdNx.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+
+		let  jna=  m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')
+
+		if (!jna) return replay (`invalid user!`)
+
+		let finaa =  `「REMOVED」 \n\nThis gaidi @${jna.split('@')[0]} 😂😂💔has been removed from this group (kumamake😱)! `
+
+		await GojoMdNx.groupParticipantsUpdate(m.chat, [users], 'remove')
+
+			.then((res) => ( GojoMdNx.sendText(m.chat, finaa, m, { mentions: parseMention(finaa) })))
+
+			.catch((err) => reply(jsonformat(err)))
+
 	}
+
 	break
+
 	case 'add': {
+
 		if (!m.isGroup) return replay(`${mess.group}`)
+
                 if (!isBotAdmins) return replay(`${mess.botAdmin}`)
-                if (!isAdmins) return replay(`${mess.admin}`)
-		let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await GojoMdNx.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+
+                 if ((!isAdmins)&&(!isCreator))  return replay(`${mess.admin}`)
+
+		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
+
+		let  jna=  m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')
+
+		if (!jna) return replay (`invalid user!`)
+
+		let finaa =  `「NEW MEMBER ADDED」 \n\nThis guy @${jna.split('@')[0]} 🤟has been added to this group♥️! `
+
+		await GojoMdNx.groupParticipantsUpdate(m.chat, [users], 'add')
+
+			.then((res) => ( GojoMdNx.sendText(m.chat, finaa, m, { mentions: parseMention(finaa) })))
+
+			.catch((err) => reply(jsonformat(err)))
+
 	}
+
 	break
+
 	case 'promote': {
+
 		if (!m.isGroup) return replay(`${mess.group}`)
+
                 if (!isBotAdmins) return replay(`${mess.botAdmin}`)
-                if (!isAdmins) return replay(`${mess.admin}`)
+
+                 if ((!isAdmins)&&(!isCreator))  return replay(`${mess.admin}`)
+
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await GojoMdNx.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+
+		let  jna=  m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')
+
+		if (!jna) return replay (`invalid user!`)
+
+		let finaa =  `「NEW ADMIN」 \n\nThis guy @${jna.split('@')[0]} has been promoted to be an Admin of this group🙌🙌! `
+
+		await GojoMdNx.groupParticipantsUpdate(m.chat, [users], 'promote')
+
+			.then((res) => ( GojoMdNx.sendText(m.chat, finaa, m, { mentions: parseMention(finaa) })))
+
+			.catch((err) => reply(jsonformat(err)))
+
 	}
+
 	break
+
 	case 'demote': {
+
 		if (!m.isGroup) return replay(`${mess.group}`)
+
                 if (!isBotAdmins) return replay(`${mess.botAdmin}`)
-                if (!isAdmins) return replay(`${mess.admin}`)
+
+                 if ((!isAdmins)&&(!isCreator))  return replay(`${mess.admin}`)
+
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await GojoMdNx.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+
+		let  jna=  m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')
+
+		if (!jna) return replay (`invalid user!`)
+
+		let finaa =  `「DEMOTED」 \n\nThis guy @${jna.split('@')[0]} has been dismissed as an Admin of this group😂😂🤥 (jameni)! `
+
+		await GojoMdNx.groupParticipantsUpdate(m.chat, [users], 'demote')
+
+			.then((res) => ( GojoMdNx.sendText(m.chat, finaa, m, { mentions: parseMention(finaa) })))
+
+			.catch((err) => reply(jsonformat(err)))
+
 	}
+
 	break
         case 'block': {
 		if (!isCreator) return replay(`${mess.owner}`)
@@ -1567,16 +1590,16 @@ case 'halah': case 'hilih': case 'huluh': case 'heleh': case 'holoh':
                 if (!m.isGroup) return replay(`${mess.group}`)
                 if (!isBotAdmins) return replay(`${mess.botAdmin}`)
                 if (!isAdmins) return replay(`${mess.admin}`)
-let teks = `╚»˙·٠•●♥ Tag All ♥●•٠·˙«╝ 
+let teks = `╚»˙·٠•●✨ Tag All ✨●•٠·˙«╝ 
  
  ➲ *Message : ${q ? q : 'no message'}*\n\n`
                 for (let mem of participants) {
-                teks += `🐦 @${mem.id.split('@')[0]}\n`
+                teks += `💥 @${mem.id.split('@')[0]}\n`
                 }
                 GojoMdNx.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
                 }
                 break
-                case 'hidetag': {
+                case 'hidetag': case 'h': {
             if (!m.isGroup) return replay(`${mess.group}`)
             if (!isBotAdmins) return replay(`${mess.botAdmin}`)
             if (!isAdmins) return replay(`${mess.admin}`)
@@ -1906,22 +1929,22 @@ break
 		    await sleep(1500)
 		    let btn = [{
                                 urlButton: {
-                                    displayText: 'Script🔖',
+                                    displayText: 'Script🥳',
                                     url: `${sc}`
                                 }
                             }, {
                                 urlButton: {
-                                    displayText: 'YouTube📍',
+                                    displayText: 'YouTube🔌',
                                     url: `${myweb}`
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: '🎀Menu🎀',
+                                    displayText: '😈Menu😈',
                                     id: 'menu'
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: '👤Owner👤',
+                                    displayText: '⚒️Owner⚒️',
                                     id: 'owner'
                                 }
                             }]
@@ -1940,8 +1963,8 @@ break
                     let read = i.readTimestamp
                     let unread = i.receiptTimestamp
                     let waktu = read ? read : unread
-                    teks += `🐦 @${i.userJid.split('@')[0]}\n`
-                    teks += ` ┗━🐦 *Time :* ${moment(waktu * 1000).format('DD/MM/YY HH:mm:ss')} 🐦 *Status :* ${read ? 'Read' : 'Sent'}\n\n`
+                    teks += `✍️ @${i.userJid.split('@')[0]}\n`
+                    teks += ` ┗━✍️ *Time :* ${moment(waktu * 1000).format('DD/MM/YY HH:mm:ss')} 🐦 *Status :* ${read ? 'Read' : 'Sent'}\n\n`
                 }
                 GojoMdNx.sendTextWithMentions(m.chat, teks, m)
             }
@@ -1968,7 +1991,7 @@ break
                  let teks = `⬣ *GROUP CHAT LIST*\n\nTotal Group : ${anu.length} Group\n\n`
                  for (let i of anu) {
                      let metadata = await GojoMdNx.groupMetadata(i)
-                     teks += `💫 *Name :* ${metadata.subject}\n💫 *Owner :* @${metadata.owner.split('@')[0]}\n💫 *ID :* ${metadata.id}\n💫 *Made :* ${moment(metadata.creation * 1000).tz('Asia/Kolkata').format('DD/MM/YYYY HH:mm:ss')}\n💫 *Member :* ${metadata.participants.length}\n\n────────────────────────\n\n`
+                     teks += `🏅 *Name :* ${metadata.subject}\n🥇 *Owner :* @${metadata.owner.split('@')[0]}\n💫 *ID :* ${metadata.id}\n💫 *Made :* ${moment(metadata.creation * 1000).tz('Asia/Kolkata').format('DD/MM/YYYY HH:mm:ss')}\n💫 *Member :* ${metadata.participants.length}\n\n────────────────────────\n\n`
                  }
                  GojoMdNx.sendTextWithMentions(m.chat, teks, m)
              }
@@ -3491,10 +3514,10 @@ const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                             locationMessage: {
                             jpegThumbnail: fs.readFileSync('./GojoMedia/gojo.jpg')},
                             hydratedFooterText: `┌─❖
-│「 Hi 👋 」
+│「 Rada 😁 」
 └┬❖ 「 ${pushname} 」
-┌┤✑  Shashi burina thaicho🎉
-││✑  🐦🖐️!!
+┌┤✑  Bado Sijakufa😂
+││✑  🇰🇪🇰🇪!!
 │└───────────────┈ ⳹
 │ 「 BOT INFO 」
 │✙ 𝗦𝗽𝗲𝗲𝗱 : ${latensie.toFixed(4)} miliseconds
@@ -3510,27 +3533,27 @@ const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
    └───────────────┈ ⳹`,
                             hydratedButtons: [{
                                 urlButton: {
-                                    displayText: 'YouTube📍',
+                                    displayText: 'YouTube🔌',
                                     url: `${myweb}`
                                 }
                             }, {
                             	urlButton: {
-                                displayText: 'Script🔖',
+                                displayText: 'Script🥳',
                                     url: `${sc}`
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: '🍇All Menu🍇',
+                                    displayText: '😈All Menu😈',
                                     id: `${prefix}allmenu`
                                 }
                                 }, {
                                 quickReplyButton: {
-                                    displayText: '🍒List Menu🍒',
+                                    displayText: '🏁List Menu🏁',
                                     id: `${prefix}command`
                                 }
                                 }, {
                                 quickReplyButton: {
-                                    displayText: '👤Owner👤',
+                                    displayText: '⚒️Owner⚒️',
                                     id: `${prefix}owner`
                                 }
                             }]
@@ -3552,9 +3575,9 @@ const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                             jpegThumbnail: fs.readFileSync('./GojoMedia/gojo.jpg')}, 
                             hydratedFooterText: `
 ┌─❖
-│「 Hi 👋 」
+│「 Niaje yoh 👊 」
 └┬❖ 「 ${pushname} 」
-┌┤✑  Daijobka sempai?😄
+┌┤✑  Ukoje Mzing?😎😎
 │└───────────────┈ ⳹
 │ 「 BOT INFO 」
 │✙ 𝗦𝗽𝗲𝗲𝗱 : ${latensie.toFixed(4)} miliseconds
@@ -3570,17 +3593,17 @@ const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
    └───────────────┈ ⳹`,
                             hydratedButtons: [{
                                 urlButton: {
-                                    displayText: 'YouTube📍',
+                                    displayText: 'YouTube🔌',
                                     url: `${myweb}`
                                 }
                             }, {
                             	urlButton: {
-                                displayText: 'Script🔖',
+                                displayText: 'Script🥳',
                                     url: `${sc}`
                                 }
                             }, {
                                 quickReplyButton: {
-                                    displayText: 'All Menu🎉',
+                                    displayText: 'All Menu😎',
                                     id: `${prefix}allmenu`
                                 }
                                 }, {
@@ -3590,7 +3613,7 @@ const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                                 }
                                 }, {
                                 quickReplyButton: {
-                                    displayText: 'Owner🐦',
+                                    displayText: '⚒️Owner⚒️',
                                     id: `${prefix}owner`
                                 }
                             }]
@@ -3726,11 +3749,11 @@ let template = await generateWAMessageFromContent(m.chat, proto.Message.fromObje
             }
             break
     case 'donasi': case 'donate': case 'sewabot': case 'sewa': {
-                GojoMdNx.sendMessage(m.chat, { image: { url: 'https://telegra.ph/file/c15f725add0381fb69c4b.jpg' }, caption: `*Hi Bro ${m.pushName}*\nDonation section is currently down🥲 , I know you are happy but me 🥲💔\n` }, { quoted: m })
+                GojoMdNx.sendMessage(m.chat, { image: { url: 'https://telegra.ph/file/fcf7b905f385f56f45fb8.jpg' }, caption: `*Yoh mzimbiting ${m.pushName}*\nUkitaka kunishtua na kakitu mpesa no. ni ile ile ya👉👉 0790903965, usisahau na ya kutoa😂😂💪 #brocode😎 #We Attack At Dawn 🕊⋆☠︎︎𝕵⊕𝖛𝖎ηψ⊕️☠︎︎💎ღ𓃾𓃾\n` }, { quoted: m })
             }
             break
             case 'sc': case 'script': {
-                reply(`GitHub : https://github.com/nexusNw/Gojo-Satoru\n Dont Forget To Give Star\n\nYouTube : ${myweb}\nDont Forget To Watch Tutorial`)
+                reply(`GitHub : https://github.com/nexusNw/Gojo-Satoru\n Dont Forget To Give Star\n\nYouTube : ${myweb}\nDont Forget To Watch Tutorial 🕊⋆☠︎︎𝕵⊕𝖛𝖎ηψ⊕️☠︎︎💎ღ𓃾𓃾`)
             }
             break
 case 'allmenu': {
@@ -3961,7 +3984,7 @@ case 'allmenu': {
 ┃╠${prefix}masasubur (indo)
 ┃╠${prefix}zodiak (indo)
 ┃╠${prefix}shio (indo)
-┃╚═══════✍︎𝑁𝑒𝑥𝑢𝑠𝑁𝑤
+┃╚═══════✍︎🕊⋆☠︎︎𝕵⊕𝖛𝖎ηψ⊕️☠︎︎💎
 ┗━「 *Created By ${ownername}*  𖠌」━⭓`
     const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
                     templateMessage: {
@@ -4372,10 +4395,10 @@ break
 case 'thanksto': case 'tqto': case 'tqtt':
 var unicorn = await getBuffer(picak+'Developer')
 await GojoMdNx.send5ButImg(from, `` + '' + ' ', `
-Thanks to Me ( NexusNw)
-Alien-Alfa (For helping me to deploy qr in replit and answered my every doubts regard this project)
+Thanks to Me ( 🕊⋆☠︎︎𝕵⊕𝖛𝖎ηψ⊕️☠︎︎💎ღ𓃾𓃾)
+Nexus (Helped me to deploy qr in replit and answered my every doubts regard this project)
 DGXeon ( 45% Credits goes to him ,in this script)
-And Again Me (King Nexus 🎉) 🐦 Who Helped Assemble This Sexy Script !!!`,unicorn, [{"urlButton": {"displayText": "YouTube📍","url": `${myweb}`}},{"urlButton": {"displayText": "Script🔖","url": `${sc}`}},{"quickReplyButton": {"displayText": "🍜Donate🍜","id": 'donate'}},{"quickReplyButton": {"displayText": "👤Owner👤","id": 'owner'}}] )
+And Again Me (🕊⋆☠︎︎𝕵⊕𝖛𝖎ηψ⊕️☠︎︎💎ღ𓃾𓃾) 🏁 Who Helped Assemble This Sexy Script !!!`,unicorn, [{"urlButton": {"displayText": "YouTube📍","url": `${myweb}`}},{"urlButton": {"displayText": "Script🔖","url": `${sc}`}},{"quickReplyButton": {"displayText": "🍜Donate🍜","id": 'donate'}},{"quickReplyButton": {"displayText": "👤Owner👤","id": 'owner'}}] )
 break
             default:
                 if (budy.startsWith('=>')) {
