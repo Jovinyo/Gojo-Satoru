@@ -258,7 +258,6 @@ const reply = (teks) => {
         if (isgclink) return reply(`Group Is Installed With Anti-Link But I Won't Kick You 😉, Because You Sent This Group Link❤️`)
         if (isAdmins) return reply(`Group Is Installed With Anti-Link But I Won't Kick You 😉, Because You Are An Admin Of The Group❤️`)
         if (isCreator) return reply(`Group Is Installed With Anti-Link But I Won't Kick You 😉, Because You Are My Owner Hahahahah🤣😘, You Think I Will Betray You Huh🐦`)
-		]
 		
         GojoMdNx.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
         }
@@ -1838,6 +1837,98 @@ break
                 }
              }
              break
+
+ 
+		case 'Welcome': {
+
+		if (!m.isGroup) return replay(`${mess.group}`)
+
+                if (!isBotAdmins) return replay(`${mess.botAdmin}`)
+
+                if (!isAdmins) return replay(`${mess.admin}`)
+
+                if (args[0] === "on") {
+
+                if (db.data.chats[m.chat].welcome) return reply(`Activated`)
+
+                db.data.chats[m.chat].welcome = true
+
+                reply(`Welcome Messages Active !`)
+
+                } else if (args[0] === "off") {
+
+                if (!db.data.chats[m.chat].welcome) return reply(`Deactivated`)
+
+                db.data.chats[m.chat].welcome = false
+
+                reply(`Welcome Messages Inactive !`)
+
+                } else {
+
+                 let buttons = [
+
+                        { buttonId: 'welcome on', buttonText: { displayText: 'On' }, type: 1 },
+
+                        { buttonId: 'welcome off', buttonText: { displayText: 'Off' }, type: 1 }
+
+	
+
+			 ]
+
+		await GojoMdNx.sendButtonText(m.chat, buttons, `Welcome Mode`, GojoMdNx.user.name, m)
+
+	
+
+			 }
+
+		     }
+
+		    break 
+		
+	case 'bye': {
+
+		if (!m.isGroup) return replay(`${mess.group}`)
+
+
+                if (!isBotAdmins) return replay(`${mess.botAdmin}`)
+
+                if (!isAdmins) return replay(`${mess.admin}`)
+
+                if (args[0] === "on") {
+
+                if (db.data.chats[m.chat].bye) return reply(`Activated`)
+
+                db.data.chats[m.chat].bye = true
+
+                reply(`Bye Messages Active !`)
+
+                } else if (args[0] === "off") {
+
+                if (!db.data.chats[m.chat].bye) return reply(`Deactivated`)
+
+                db.data.chats[m.chat].bye = false
+
+                reply(`Bye Messages Inactive !`)
+
+                } else {
+
+                 let buttons = [
+
+            { buttonId: 'mute on', buttonText: { displayText: 'On' }, type: 1 },
+
+                        { buttonId: 'mute off', buttonText: { displayText: 'Off' }, type: 1 }
+
+                    ]
+
+                    await GojoMdNx.sendButtonText(m.chat, buttons, `Mute Bot`, GojoMdNx.user.name, m)
+
+                }
+
+             }
+
+             break
+		
+	   
              case 'mute': {
                 if (!m.isGroup) return replay(`${mess.group}`)
                 if (!isBotAdmins) return replay(`${mess.botAdmin}`)
@@ -1999,7 +2090,7 @@ break
              case 'listonlinexxx': case 'onlinelistxxx': {
                     let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
                     let online = [...Object.keys(store.presences[id]), botNumber]
-                    GojoMdNx.sendText(m.chat, 'Online List:\n\n' + online.map(v => '🐦 @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })
+                    GojoMdNx.sendText(m.chat, 'Online List:\n\n' + online.map(v => '📌 @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })
              }
              break
             case 'sticker': case 's': case 'stickergif': case 'sgif': {
